@@ -1,0 +1,18 @@
+[
+    {
+        "task_id": 1,
+        "title": "Do work",
+        "description": "description about to do some work",
+        "status": "Done",
+        "creation_date": null,
+        "deadline_date": "2026-03-02T14:30:45.123456"
+    },
+    {
+        "task_id": 2,
+        "title": "Do workout",
+        "description": "description about to do some workout",
+        "status": "Undone",
+        "creation_date": null,
+        "deadline_date": "2026-03-03T14:30:45.123456"
+    }
+]

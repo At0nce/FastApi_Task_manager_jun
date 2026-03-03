@@ -5,12 +5,13 @@ from fastapi.responses import FileResponse
 from typing import Annotated
 from app.schemas.tasks import TaskSchema
 from app.schemas.users import UserSchema
-from app.routes import user_route, task_route
+from app.routes import user_route, task_route, auth_route
 
 app = FastAPI()
 
 app.include_router(user_route.user_routers)
 app.include_router(task_route.task_routers)
+app.include_router(auth_route.auth_routers)
 
 users_list = []
 tasks_list = []
@@ -18,7 +19,7 @@ tasks_list = []
 @app.post("/user")
 async def create_user(user: UserSchema):
     #TODO DATABASE MANAGEMENT
-    users_list.append({"id": user.id, "username": user.username})
+    users_list.append({"id": user.user_id, "username": user.username})
     return {"message": "user created"}
 
 

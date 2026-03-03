@@ -6,16 +6,15 @@ from datetime import datetime
 
 
 class TaskSchema(BaseModel):
-    task_id: int
     title : str
     description : Optional[str] = None
     status : str
-    creation_date : datetime
     deadline_date : datetime
 
 class TaskResponse(BaseModel):
     message: str
     task: TaskSchema
+    owner_id: int
 
     class Config:
         from_attributes = True
@@ -27,7 +26,6 @@ class TaskCreate(BaseModel):
     deadline_date: datetime
 
 class TaskUpdate(BaseModel):
-    task_id: int
     title: Optional[str] = None
     description: Optional[str] = None
     status: Optional[str] = None

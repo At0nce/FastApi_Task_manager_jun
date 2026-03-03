@@ -6,7 +6,7 @@ from datetime import datetime, date
 
 from sqlalchemy import insert, delete
 from app.models.db_models import UserModel, TaskModel
-from app.database.database import engine
+from app.database.database import engine, AsyncSessionLocal
 
 
 def load_data(file_path):
@@ -51,6 +51,28 @@ async def create_table_with_inserted_data(table, data, clear_before=False):
         await conn.execute(insert(table), data)
         await conn.commit()
         print(f"Добавлено {len(data)} записей в {table.__tablename__}")
+
+
+async def create_superuser():
+    """Создает суперадмина, если его нет"""
+    from app.core.security import get_password_hash
+    from sqlalchemy import select
+
+    async with AsyncSessionLocal() as db:
+        query = select(UserModel).where(UserModel.username == "admin")
+        result = await db.execute(query)
+        admin = result.scalar_one_or_none()
+
+        if not admin:
+            admin = UserModel(
+                username="admin",
+                email="admin@example.com",
+                hashed_password=get_password_hash("admin123"),
+                is_superuser=True
+            )
+            db.add(admin)
+            await db.commit()
+            print("Суперадмин создан (admin/admin123)")
 
 
 async def main():

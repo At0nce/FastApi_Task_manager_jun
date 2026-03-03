@@ -9,7 +9,6 @@ FastAPI проект с PostgreSQL, SQLAlchemy и Alembic.
 - Асинхронные эндпоинты
 
 ## Установка
-```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -22,8 +21,3 @@ alembic -c app/alembic.ini upgrade head
 cd app/scripts
 python create_data.py
 
-## Установка
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt

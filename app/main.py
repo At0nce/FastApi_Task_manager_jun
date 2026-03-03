@@ -21,38 +21,6 @@ async def create_user(user: UserSchema):
     users_list.append({"id": user.id, "username": user.username})
     return {"message": "user created"}
 
-
-# @app.get("/userinfo/{user_id}")
-# async def get_userinfo(user_id: int):
-#     #TODO connect to db and extract user data
-#     for user in users_list:
-#         if user["id"] == user_id:
-#             return {"message": user["username"]}
-#     return {"message": "user not found"}
-
-
-@app.post("/task")
-async def create_task(task: TaskSchema):
-    # TODO DATABASE MANAGEMENT
-    tasks_list.append({
-                       "id": task.id,
-                       "title": task.title,
-                       "description": task.description,
-                       "status": task.status,
-                       "creation_date": task.creation_date,
-                       "deadline_date": task.deadline_date,
-    })
-    return {"message": "Task created"}
-
-@app.get("/taskinfo/{task_id}")
-async def get_taskinfo(task_id: int):
-    for task in tasks_list:
-        if task["id"] == task_id:
-            return task
-    return {"message": "task not found"}
-
-
-
 if __name__ == "__main__":
     uvicorn.run(
                 app,
